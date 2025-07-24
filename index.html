@@ -53,15 +53,27 @@
 
   <script>
     const editor = document.getElementById('editor');
+    const STORAGE_KEY = 'notepad-content';
+
+    // Load saved content on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        editor.innerHTML = saved;
+        editor.classList.remove('placeholder');
+      }
+    });
+
+    // Save content on input
+    editor.addEventListener('input', () => {
+      localStorage.setItem(STORAGE_KEY, editor.innerHTML);
+      editor.classList.remove('placeholder');
+    });
 
     editor.addEventListener('focus', () => {
       if (editor.innerHTML === '') {
         editor.classList.remove('placeholder');
       }
-    });
-
-    editor.addEventListener('input', () => {
-      editor.classList.remove('placeholder');
     });
 
     editor.addEventListener('keydown', function (e) {
