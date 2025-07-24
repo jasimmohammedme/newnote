@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;New Note&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: black;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: Helvetica, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#editor {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100vw;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.placeholder::before {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>content: attr(data-placeholder);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: grey;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#editor p {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: normal;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>ul, ol {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding-left: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>li:empty:after {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>content: '\200B';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="editor" class="placeholder" contenteditable="true" data-placeholder="Start writing..."&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const editor = document.getElementById('editor');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>editor.addEventListener('focus', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (editor.innerHTML === '') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>editor.classList.remove('placeholder');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>editor.addEventListener('input', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>editor.classList.remove('placeholder');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>editor.addEventListener('keydown', function (e) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const sel = window.getSelection();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const range = sel.getRangeAt(0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const container = range.startContainer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const parent = container.parentNode;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const text = container.textContent.trim();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (e.key === 'Enter' &amp;&amp; editor.childNodes.length === 1 &amp;&amp; editor.innerText.trim() !== '') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const newNode = document.createElement('p');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>newNode.innerHTML = '&lt;br&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>editor.appendChild(newNode);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const range = document.createRange();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const sel = window.getSelection();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>range.setStart(newNode, 0);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>range.collapse(true);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>sel.removeAllRanges();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>sel.addRange(range);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (e.key === ' ' &amp;&amp; text === '1.') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.textContent = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ol = document.createElement('ol');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const li = document.createElement('li');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>li.appendChild(document.createElement('br'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ol.appendChild(li);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>range.insertNode(ol);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>range.setStart(li, 0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sel.removeAllRanges();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sel.addRange(range);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else if (e.key === ' ' &amp;&amp; text === '-') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.textContent = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ul = document.createElement('ul');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const li = document.createElement('li');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>li.appendChild(document.createElement('br'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ul.appendChild(li);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>range.insertNode(ul);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>range.setStart(li, 0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sel.removeAllRanges();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sel.addRange(range);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else if (e.key === 'Enter') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (parent.tagName === 'LI' &amp;&amp; parent.textContent.trim() === '') {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const p = document.createElement('p');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p.innerHTML = '&lt;br&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>parent.parentNode.parentNode.insertBefore(p, parent.parentNode.nextSibling);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>parent.remove();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>range.setStart(p, 0);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>sel.removeAllRanges();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>sel.addRange(range);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
