@@ -1,125 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minimal Note App</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: black;
-      color: white;
-      font-family: Helvetica, sans-serif;
-    }
-
-    #editor {
-      width: 100vw;
-      height: 100vh;
-      padding: 40px;
-      outline: none;
-      font-size: 3rem;
-      font-weight: bold;
-      color: white;
-    }
-
-    .placeholder::before {
-      content: attr(data-placeholder);
-      color: grey;
-      position: absolute;
-      pointer-events: none;
-      font-size: 3rem;
-      font-weight: bold;
-    }
-
-    #editor p {
-      font-size: 1.2rem;
-      font-weight: normal;
-      margin: 0;
-    }
-
-    ul, ol {
-      margin: 0;
-      padding-left: 40px;
-    }
-
-    li:empty:after {
-      content: '\200B';
-    }
-  </style>
-</head>
-<body>
-  <div id="editor" class="placeholder" contenteditable="true" data-placeholder="Start writing..."></div>
-
-  <script>
-    const editor = document.getElementById('editor');
-
-    editor.addEventListener('focus', () => {
-      if (editor.innerHTML === '') {
-        editor.classList.remove('placeholder');
-      }
-    });
-
-    editor.addEventListener('input', () => {
-      editor.classList.remove('placeholder');
-    });
-
-    editor.addEventListener('keydown', function (e) {
-      const sel = window.getSelection();
-      const range = sel.getRangeAt(0);
-      const container = range.startContainer;
-      const parent = container.parentNode;
-      const text = container.textContent.trim();
-
-      if (e.key === 'Enter' && editor.childNodes.length === 1 && editor.innerText.trim() !== '') {
-        setTimeout(() => {
-          const newNode = document.createElement('p');
-          newNode.innerHTML = '<br>';
-          editor.appendChild(newNode);
-          const range = document.createRange();
-          const sel = window.getSelection();
-          range.setStart(newNode, 0);
-          range.collapse(true);
-          sel.removeAllRanges();
-          sel.addRange(range);
-        }, 0);
+---
+title: "newnote"
+html: |
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimal Note App</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+        font-family: Helvetica, sans-serif;
       }
 
-      if (e.key === ' ' && text === '1.') {
-        e.preventDefault();
-        container.textContent = '';
-        const ol = document.createElement('ol');
-        const li = document.createElement('li');
-        li.appendChild(document.createElement('br'));
-        ol.appendChild(li);
-        range.insertNode(ol);
-        range.setStart(li, 0);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      } else if (e.key === ' ' && text === '-') {
-        e.preventDefault();
-        container.textContent = '';
-        const ul = document.createElement('ul');
-        const li = document.createElement('li');
-        li.appendChild(document.createElement('br'));
-        ul.appendChild(li);
-        range.insertNode(ul);
-        range.setStart(li, 0);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      } else if (e.key === 'Enter') {
-        if (parent.tagName === 'LI' && parent.textContent.trim() === '') {
-          e.preventDefault();
-          const p = document.createElement('p');
-          p.innerHTML = '<br>';
-          parent.parentNode.parentNode.insertBefore(p, parent.parentNode.nextSibling);
-          parent.remove();
-          range.setStart(p, 0);
-          sel.removeAllRanges();
-          sel.addRange(range);
+      #editor {
+        width: 100vw;
+        height: 100vh;
+        padding: 40px;
+        outline: none;
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+      }
+
+      .placeholder::before {
+        content: attr(data-placeholder);
+        color: grey;
+        position: absolute;
+        pointer-events: none;
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      #editor p {
+        font-size: 1.2rem;
+        font-weight: normal;
+        margin: 0;
+      }
+
+      ul, ol {
+        margin: 0;
+        padding-left: 40px;
+      }
+
+      li:empty:after {
+        content: '\200B';
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor" class="placeholder" contenteditable="true" data-placeholder="Start writing..."></div>
+
+    <script>
+      const editor = document.getElementById('editor');
+
+      editor.addEventListener('focus', () => {
+        if (editor.innerHTML === '') {
+          editor.classList.remove('placeholder');
         }
-      }
-    });
-  </script>
-</body>
-</html>
+      });
+
+      editor.addEventListener('input', () => {
+        editor.classList.remove('placeholder');
+      });
+
+      editor.addEventListener('keydown', function (e) {
+        const sel = window.getSelection();
+        const range = sel.getRangeAt(0);
+        const container = range.startContainer;
+        const parent = container.parentNode;
+        const text = container.textContent.trim();
+
+        if (e.key === 'Enter' && editor.childNodes.length === 1 && editor.innerText.trim() !== '') {
+          setTimeout(() => {
+            const newNode = document.createElement('p');
+            newNode.innerHTML = '<br>';
+            editor.appendChild(newNode);
+            const range = document.createRange();
+            const sel = window.getSelection();
+            range.setStart(newNode, 0);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }, 0);
+        }
+
+        if (e.key === ' ' && text === '1.') {
+          e.preventDefault();
+          container.textContent = '';
+          const ol = document.createElement('ol');
+          const li = document.createElement('li');
+          li.appendChild(document.createElement('br'));
+          ol.appendChild(li);
+          range.insertNode(ol);
+          range.setStart(li, 0);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } else if (e.key === ' ' && text === '-') {
+          e.preventDefault();
+          container.textContent = '';
+          const ul = document.createElement('ul');
+          const li = document.createElement('li');
+          li.appendChild(document.createElement('br'));
+          ul.appendChild(li);
+          range.insertNode(ul);
+          range.setStart(li, 0);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } else if (e.key === 'Enter') {
+          if (parent.tagName === 'LI' && parent.textContent.trim() === '') {
+            e.preventDefault();
+            const p = document.createElement('p');
+            p.innerHTML = '<br>';
+            parent.parentNode.parentNode.insertBefore(p, parent.parentNode.nextSibling);
+            parent.remove();
+            range.setStart(p, 0);
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }
+        }
+      });
+    </script>
+  </body>
+  </html>
+---
